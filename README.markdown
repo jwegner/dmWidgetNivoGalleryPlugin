@@ -9,3 +9,12 @@ Documentation
 -------------
 
 Please see the online documentation : [Diem widget gallery documentation](http://diem-project.org/plugins/dmwidgetnivogalleryplugin)
+
+
+Changes / Additional features
+-----------------------------
+
+* upgrade to jQuery Nivo Slider v3.2
+* chose between bullet icons and image thumbnails
+* native theme support (see config/app.yml and config/dm/assets.yml)
+* i18n: update for german language

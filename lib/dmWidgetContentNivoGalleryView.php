@@ -17,14 +17,14 @@ class dmWidgetContentNivoGalleryView extends dmWidgetPluginView
     $this->addStylesheet(array('dmWidgetNivoGalleryPlugin.view',
       sfConfig::get('app_dmWidgetNivoGalleryPlugin_css')
         ? sfConfig::get('app_dmWidgetNivoGalleryPlugin_css')
-        : 'dmWidgetNivoGalleryPlugin.nivo'));
+        : 'dmWidgetNivoGalleryPlugin.theme_' . sfConfig::get('app_dmWidgetNivoGalleryPlugin_theme')));
     
   }
 
   protected function filterViewVars(array $vars = array())
   {
     $vars = parent::filterViewVars($vars);
-    
+        
     // extract media ids
     $mediaIds = array();
     foreach($vars['medias'] as $index => $mediaConfig)
@@ -45,11 +45,6 @@ class dmWidgetContentNivoGalleryView extends dmWidgetPluginView
     {
       $mediaTag = $this->getHelper()->media($mediaRecord);
   
-      if (!empty($vars['width']) || !empty($vars['height']))
-      {
-        $mediaTag->size(dmArray::get($vars, 'width'), dmArray::get($vars, 'height'));
-      }
-  
       $mediaTag->method($vars['method']);
   
       if ($vars['method'] === 'fit')
@@ -69,7 +64,8 @@ class dmWidgetContentNivoGalleryView extends dmWidgetPluginView
       
       $medias[] = array(
         'tag'   => $mediaTag,
-        'link'  => $vars['medias'][$index]['link']
+        'link'  => $vars['medias'][$index]['link'],
+        'alt'  => $this->__($vars['medias'][$index]['alt'])
       );
     }
   
@@ -98,35 +94,30 @@ class dmWidgetContentNivoGalleryView extends dmWidgetPluginView
       return $cache;
     }
     
-    $vars = $this->getViewVars();
+    $vars = $this->getViewVars();    
     $helper = $this->getHelper();
     $count = count($vars['medias']);
     
-    $html = $helper->open('div#dm_widget_nivo_gallery_container');
-    $html .= $helper->open('div#dm_widget_nivo_gallery', array('json' => array(
+    $html = $helper->open('div#dm_widget_nivo_gallery_container.slider-wrapper.theme-'. sfConfig::get('app_dmWidgetNivoGalleryPlugin_theme'));
+    $html .= $helper->open('div#dm_widget_nivo_gallery.nivoSlider', array('json' => array(
       'fx'             => dmArray::get($vars, 'fx', '0.5', 'fade'),
       'animspeed'      => dmArray::get($vars, 'animspeed', 0.5),
       'pausetime'      => dmArray::get($vars, 'pausetime', 3),
-      'width'          => dmArray::get($vars, 'width'),
-      'height'         => dmArray::get($vars, 'height'),
+      'nav_thumbs'      => dmArray::get($vars, 'controlNavThumbs', false),
       'count'          => $count
     )));
     
     foreach($vars['medias'] as $media)
     {
-      $html .= $media['link'] ? $helper->link($media['link'])->text($media['tag']) : $media['tag'];
+      if($vars['controlNavThumbs'] == true) {       
+        $html .= sprintf('<img src="%s" alt="%s" title="%s" data-thumb="%s" />', $media['tag']->getSrc(), $media['alt'], $media['alt'], $media['tag']->width($vars['width'])->getSrc());
+      } else {
+        $html .= sprintf('<img src="%s" alt="%s" title="%s" />', $media['tag']->getSrc(), $media['alt'], $media['alt']);
+      }
     }
     
     $html .= '</div></div>';
 
-    // add media numbers
-//    if (isset($vars['show_pager']) && $vars['show_pager'])
-//    {
-//      $html .= $helper->open('div#mediaPager'.$this->widget['id'].'.pager');
-//      $html .= $helper->close('div');
-//    }
-
-    
     if ($this->isCachable())
     {
       $this->setCache($html);

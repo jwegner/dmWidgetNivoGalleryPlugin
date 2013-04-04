@@ -10,5 +10,9 @@ css:
 
   dmWidgetNivoGalleryPlugin:
     
-    view:      view
-    form:      form
+    view:           view
+    form:           form
+    theme_default:  themes/default
+    theme_bar:      themes/bar
+    theme_dark:     themes/dark
+    theme_light:    themes/light

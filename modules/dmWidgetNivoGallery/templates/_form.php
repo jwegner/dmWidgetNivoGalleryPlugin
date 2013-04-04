@@ -23,6 +23,9 @@ _tag('div#'.$baseTabId.'_medias.drop_zone',
 
 _tag('div#'.$baseTabId.'_thumbnails',
   _tag('ul',
+    _tag('li.dm_form_element.multi_inputs.thumbnail.clearfix', $form['controlNavThumbs']->label(__('Use thumbnails'))->field()->error() .
+            _tag('p.dm_help', __('Use thumbnails instead of bullet images'))
+            ).
     _tag('li.dm_form_element.multi_inputs.thumbnail.clearfix',
       $form['width']->renderError().
       $form['height']->renderError().
@@ -41,7 +44,7 @@ _tag('div#'.$baseTabId.'_thumbnails',
       _tag('p.dm_help', __('Leave empty to use default quality'))
     )
   ).
-  _tag('div.dm_help.no_margin', '<hr />'.__('These settings will apply on all images'))
+  _tag('div.dm_help.no_margin', '<hr />'.__('These settings will apply on all thumbnail images'))
 ),
 
 _tag('div#'.$baseTabId.'_effects',

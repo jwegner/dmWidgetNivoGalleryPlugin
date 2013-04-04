@@ -48,6 +48,9 @@ class dmWidgetContentNivoGalleryForm extends dmWidgetPluginForm
     
     $this->validatorSchema['media_position'] = new sfValidatorPass();
 
+    $this->widgetSchema['controlNavThumbs'] = new sfWidgetFormInputCheckbox();
+    $this->validatorSchema['controlNavThumbs'] = new sfValidatorBoolean(array('required' => false));
+    
     $this->widgetSchema['width'] = new sfWidgetFormInputText(array(), array('size' => 5));
     $this->validatorSchema['width'] = new dmValidatorCssSize(array(
       'required' => true

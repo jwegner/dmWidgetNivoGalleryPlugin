@@ -14,20 +14,13 @@
     // get options from gallery metadata
     var options = $gallery.metadata();
     
-    $gallery.css({ "width": options.width, "height": options.height});
-    $gallerycontainer.css({ "width": options.width, "height": parseInt(options.height) + 40});
-
     $gallery.nivoSlider({
         effect:     options.fx,                    
         animSpeed:  options.animspeed * 1000,
-        pauseTime:  options.pausetime * 1000
+        pauseTime:  options.pausetime * 1000,
+        controlNavThumbs: options.nav_thumbs
       });
     
-    var $navcontrol = $gallery.find('.nivo-controlNav');
-    var awidth = $navcontrol.width();
-    var mediacount = options.count;
-    var leftplacement = options.width/2 - awidth/2;
-    $navcontrol.css("left", leftplacement);
   });
 
 })(jQuery);

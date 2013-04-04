@@ -4,8 +4,8 @@
 /*=== Custom Slider Styles ===*/
 /*============================*/
 #slider-wrapper {
-    background:url(images/slider.png) no-repeat;
-    width:998px;
+    background:url(../images/slider.png) no-repeat;
+    width:100%;
     height:392px;
     margin:0 auto;
     padding-top:74px;
@@ -17,7 +17,7 @@
     width:618px;
     height:246px;
     margin-left:190px;
-	background:url(images/loading.gif) no-repeat 50% 50%;
+	background:url(../images/loading.gif) no-repeat 50% 50%;
 }
 #slider img {
 	position:absolute;
@@ -30,16 +30,16 @@
 	display:block;
 }
 
-.nivo-controlNav {
+/*.nivo-controlNav {
 	position:absolute;
 	left:260px;
 	bottom:-42px;
-}
+}*/
 .nivo-controlNav a {
 	display:block;
 	width:22px;
 	height:22px;
-	background:url(images/bullets.png) no-repeat;
+	background:url(../images/bullets.png) no-repeat;
 	text-indent:-9999px;
 	border:0;
 	margin-right:3px;
@@ -53,7 +53,7 @@
 	display:block;
 	width:30px;
 	height:30px;
-	background:url(images/arrows.png) no-repeat;
+	background:url(../images/arrows.png) no-repeat;
 	text-indent:-9999px;
 	border:0;
 }
